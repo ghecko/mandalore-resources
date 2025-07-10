@@ -214,8 +214,8 @@ function add_webshells() {
   chkfs "./webshells/PHP/wso-webshell/"
   wget -O ./webshells/PHP/wso-webshell/wso.php "https://raw.githubusercontent.com/mIcHyAmRaNe/wso-webshell/master/wso.php"
   sed -i 's/fa769dac7a0a94ee47d8ebe021eaba9e/0fc3bcf177377d328c77b2b51b7f3c9b/g' ./webshells/PHP/wso-webshell/wso.php 2>/dev/null || perl -i -pe 's/fa769dac7a0a94ee47d8ebe021eaba9e/0fc3bcf177377d328c77b2b51b7f3c9b/g' ./webshells/PHP/wso-webshell/wso.php
-  echo 'exegol4thewin' > ./webshells/PHP/wso-webshell/password.txt
-  # Setting password to exegol4thewin
+  echo 'mandalore4thewin' > ./webshells/PHP/wso-webshell/password.txt
+  # Setting password to mandalore4thewin
   chkfs "./webshells/ASPX"
   wget -O ./webshells/ASPX/webshell.aspx "https://raw.githubusercontent.com/xl7dev/WebShell/master/Aspx/ASPX%20Shell.aspx"
   add-to-list "Some webshells,,PHP and ASPX webshells"
@@ -363,4 +363,4 @@ function add_resources() {
 rm resources_list.csv
 add-to-list "Resource,Link,Description"
 add_resources
-success "Done updating Exegol-resources"
+success "Done updating Mandalore-resources"

@@ -14,7 +14,7 @@ jobs:
     name: Export resources list
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Exegol-resources
+      - name: Checkout Mandalore-resources
         uses: actions/checkout@main
       - name: (dbg) print resources_list.csv
         id: list_exists
@@ -28,41 +28,41 @@ jobs:
             && (echo '[-] Wrong number of columns on the following lines' \
             && grep -oE '([^,]*,[^,]*){3,}' resources_list.csv || exit 1) \
             || (echo '[+] List contains right number of columns' && exit 0)
-      - name: Checkout Exegol-docs
+      - name: Checkout Mandalore-docs
         uses: actions/checkout@main
         with:
-          repository: 'ThePorgs/Exegol-docs'
+          repository: 'lksec/mandalore-docs'
       - name: Adding list to repo and tables (overwriting previous)
         id: adding_list
         if: always() && steps.list_exists.outcome == 'success'
         run: |
           echo '[*] Moving resources list to (static) resources_list.csv'
-          mv -v /tmp/resources_list.csv source/assets/exegol_resources/resources_list.csv
+          mv -v /tmp/resources_list.csv source/assets/mandalore_resources/resources_list.csv
       - name: (dbg) print resources_list.csv
         if: always() && !contains(steps.adding_list.outcome, 'skipped')
         id: final_list_exists
         run: |
           echo '[*] Printing resources_list.csv'
-          cat source/assets/exegol_resources/resources_list.csv
-      - name: Push to Exegol-docs
+          cat source/assets/mandalore_resources/resources_list.csv
+      - name: Push to Mandalore-docs
         if: always() && steps.final_list_exists.outcome == 'success'
         env:
-          EXEGOL_DOCS_SSH_DEPLOY_KEY: ${{ secrets.EXEGOL_DOCS_SSH_DEPLOY_KEY }}
+          MANDALORE_DOCS_SSH_DEPLOY_KEY: ${{ secrets.MANDALORE_DOCS_SSH_DEPLOY_KEY }}
         run: |
           echo '[*] Setting up git env for SSH use'
           mkdir -p "$HOME/.ssh"
           DEPLOY_KEY_FILE="$HOME/.ssh/deploy_key"
-          echo "${EXEGOL_DOCS_SSH_DEPLOY_KEY}" > "$DEPLOY_KEY_FILE"
+          echo "${MANDALORE_DOCS_SSH_DEPLOY_KEY}" > "$DEPLOY_KEY_FILE"
           chmod 600 "$DEPLOY_KEY_FILE"
           SSH_KNOWN_HOSTS_FILE="$HOME/.ssh/known_hosts"
           ssh-keyscan -H github.com > "$SSH_KNOWN_HOSTS_FILE"
           export GIT_SSH_COMMAND="ssh -i "$DEPLOY_KEY_FILE" -o UserKnownHostsFile=$SSH_KNOWN_HOSTS_FILE"
-          GIT_CMD_REPOSITORY="git@github.com:ThePorgs/Exegol-docs.git"
+          GIT_CMD_REPOSITORY="git@github.com:ghecko/mandalore-docs.git"
           echo '[*] Setting git config'
           git config --local user.name "Github Actions"
           git config --local user.email "actions@github.com"
           echo '[*] Staging change'
-          git add --verbose source/assets/exegol_resources/resources_list.csv
+          git add --verbose source/assets/mandalore_resources/resources_list.csv
           echo '[*] Commiting changes'
           git commit --verbose -m "PIPELINE: resources list"
           echo '[*] Pulling latest changes from remote'

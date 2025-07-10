@@ -1,11 +1,11 @@
 
-> **📌 This repository hosts code for Exegol images, a submodule of the Exegol project. 
-> If you were looking for Exegol, go to [the main repo](https://github.com/ShutdownRepo/Exegol)**
+> **📌 This repository hosts code for Mandalore images, a submodule of the Mandalore project. 
+> If you were looking for Mandalore, go to [the main repo](https://github.com/ShutdownRepo/Mandalore)**
 ___
 
-# Exegol resources
+# Mandalore resources
 
-This repository hosts various files that can be useful to Exegol users during pentest engagements, bug bounties, CTFs, and so on.
-These resources are automatically downloaded, loaded and updated by the Exegol wrapper (entrypoint to the project) and can be shared (enabled by default) with Exegol containers.
+This repository hosts various files that can be useful to Mandalore users during pentest engagements, bug bounties, CTFs, and so on.
+These resources are automatically downloaded, loaded and updated by the Mandalore wrapper (entrypoint to the project) and can be shared (enabled by default) with Mandalore containers.
 
-More information on [the Exegol documentation](https://exegol.readthedocs.io/en/latest/the-exegol-project/offline-resources.html).
+More information on [the Mandalore documentation](https://mandalore.readthedocs.io/en/latest/the-mandalore-project/offline-resources.html).
