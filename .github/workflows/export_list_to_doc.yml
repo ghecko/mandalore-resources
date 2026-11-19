@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - fork-before-v5
+      - main
     paths-ignore:
       - ".github/**"
       - "**.md"
@@ -34,7 +34,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'ghecko/mandalore-docs'
-          ref: 'fork-before-v5'
+          ref: 'main'
           # Deploy key (write access) of ghecko/mandalore-docs; also used by `git push` below.
           ssh-key: ${{ secrets.MANDALORE_DOCS_SSH_DEPLOY_KEY }}
       - name: Adding list to repo and tables (overwriting previous)
