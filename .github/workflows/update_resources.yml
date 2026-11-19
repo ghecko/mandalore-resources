@@ -22,9 +22,12 @@ jobs:
     needs: init
     name: Updating resources
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout resources repo
-        uses: actions/checkout@main
+        uses: actions/checkout@v4
       - name: Create new local branch from timestamp
         run: git checkout -b ${{ needs.init.outputs.BRANCH_NAME }}
       - name: Update resources
@@ -41,6 +44,6 @@ jobs:
       - name: Pushing new branch
         run: git push --set-upstream origin ${{ needs.init.outputs.BRANCH_NAME }}
       - name: Creating pull request
-        run: gh pr create --base "main" --head "${{ needs.init.outputs.BRANCH_NAME }}" --title "Resources update $(date '+%d-%b-%y')" --body 'Created by GitHub Action' --label "bot"
+        run: gh pr create --base "fork-before-v5" --head "${{ needs.init.outputs.BRANCH_NAME }}" --title "Resources update $(date '+%d-%b-%y')" --body 'Created by GitHub Action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
